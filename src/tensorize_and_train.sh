@@ -1,10 +1,14 @@
 #!/bin/bash
 
+source .venv/bin/activate
+
 MODEL_TYPE=$1
 INPUT_FOLDER=$2
-TARGET_FOLDER=$3
+TARGET_FOLDER="ml/$MODEL_TYPE"
 
-echo Training and tensorizing a $MODEL_TYPE model. Raw data at $INPUT_FOLDER. Tensorized data and trained model will be saved at $TARGET_FOLDER.
+echo Training and tensorizing a $MODEL_TYPE model
+echo Raw data at $INPUT_FOLDER
+echo Tensorized data and trained model will be saved at $TARGET_FOLDER
 
 export PYTHONPATH=$PWD
 
@@ -17,3 +21,5 @@ python3 typilus/utils/tensorise.py --model $MODEL_TYPE $VALID_TENSORIZED_FOLDER 
 
 python3 typilus/utils/train.py --model $MODEL_TYPE $TARGET_FOLDER/models $TRAIN_TENSORIZED_FOLDER $VALID_TENSORIZED_FOLDER
 
+
+deactivate
