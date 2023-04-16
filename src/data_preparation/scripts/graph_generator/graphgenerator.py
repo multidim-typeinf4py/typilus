@@ -257,7 +257,7 @@ class AstGraphGenerator(NodeVisitor):
             self._add_edge(node, symbol, edge_type=EdgeType.OCCURRENCE_OF)
             symbol_info = self.__variable_like_symbols.get(symbol)
             if symbol_info is None:
-                symbol_info = SymbolInformation.create(name, symbol_type)
+                symbol_info: SymbolInformation = SymbolInformation(name, [], {}, symbol_type)
                 self.__variable_like_symbols[symbol] = symbol_info
             symbol_info.locations.append((lineno, col_offset))
             if can_annotate_here:
