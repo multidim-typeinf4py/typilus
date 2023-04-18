@@ -117,7 +117,7 @@ class Sequence2Metric(Model):
             target_token_embeddings = tf.gather(params=flat_sequence_embeddings,
                                                 indices=self.placeholders['variable_bound_token_ids'])
 
-            return tf.unsorted_segment_mean(
+            return tf.compat.v1.unsorted_segment_mean(
                 data=target_token_embeddings,
                 segment_ids=self.placeholders['token_variable_ids'],
                 num_segments=self.placeholders['num_variables']  # TODO: Do not depend in any way on the classes.

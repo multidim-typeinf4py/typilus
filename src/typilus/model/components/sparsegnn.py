@@ -31,9 +31,9 @@ class SparseGGNN:
 
         message_aggregation_type = self.params.get('message_aggregation', 'sum')
         if message_aggregation_type == 'sum':
-            self.unsorted_segment_aggregation_func = tf.unsorted_segment_sum
+            self.unsorted_segment_aggregation_func = tf.compat.v1.unsorted_segment_sum
         elif message_aggregation_type == 'max':
-            self.unsorted_segment_aggregation_func = tf.unsorted_segment_max
+            self.unsorted_segment_aggregation_func = tf.compat.v1.unsorted_segment_max
         else:
             raise Exception('Unrecognized message_aggregation type %s' % message_aggregation_type)
 

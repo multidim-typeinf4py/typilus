@@ -135,7 +135,7 @@ class PathBasedModel(Model):
                                                   num_segments=self.placeholders['num_samples'])  # [num-paths]
 
             weighted_paths = tf.expand_dims(path_probs, axis=-1) * full_path_embeddings  # [num-paths, H]
-            self.ops['target_variable_representations'] = tf.unsorted_segment_sum(
+            self.ops['target_variable_representations'] = tf.compat.v1.unsorted_segment_sum(
                 weighted_paths,
                 segment_ids=self.placeholders['path_to_sample_idx'],
                 num_segments=self.placeholders['num_samples']
