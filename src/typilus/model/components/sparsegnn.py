@@ -43,7 +43,7 @@ class SparseGGNN:
             with tf.compat.v1.variable_scope('gnn_layer_%i' % layer_idx):
                 edge_weights = tf.compat.v1.get_variable(name='gnn_edge_weights',
                                                shape=[effective_num_edge_types * h_dim, h_dim],
-                                               initializer=tf.glorot_normal_initializer())
+                                               initializer=tf.compat.v1.glorot_normal_initializer())
                 edge_weights = tf.reshape(edge_weights, [effective_num_edge_types, h_dim, h_dim])
                 self.__weights.edge_weights.append(edge_weights)
 
@@ -53,7 +53,7 @@ class SparseGGNN:
                     self.__weights.edge_feature_gate_weights[layer_idx][edge_type] = \
                         tf.compat.v1.get_variable(name='gnn_edge_%i_feature_gate_weights' % (edge_type,),
                                         shape=[2 * edge_feature_size, 1],
-                                        initializer=tf.ones_initializer())
+                                        initializer=tf.compat.v1.ones_initializer())
                     self.__weights.edge_feature_gate_bias[layer_idx][edge_type] = \
                         tf.compat.v1.get_variable(name='gnn_edge_%i_feature_gate_bias' % (edge_type,),
                                         shape=[1],
@@ -62,11 +62,11 @@ class SparseGGNN:
                         self.__weights.edge_feature_gate_weights[layer_idx][self.num_edge_types + edge_type] = \
                             tf.compat.v1.get_variable(name='gnn_edge_%i_feature_gate_weights' % (self.num_edge_types + edge_type,),
                                             shape=[2 * edge_feature_size, 1],
-                                            initializer=tf.ones_initializer())
+                                            initializer=tf.compat.v1.ones_initializer())
                         self.__weights.edge_feature_gate_bias[layer_idx][self.num_edge_types + edge_type] = \
                             tf.compat.v1.get_variable(name='gnn_edge_%i_feature_gate_bias' % (self.num_edge_types + edge_type,),
                                             shape=[1],
-                                            initializer=tf.zeros_initializer())
+                                            initializer=tf.compat.v1.zeros_initializer())
 
                 cell = self.__create_rnn_cell(h_dim)
                 self.__weights.rnn_cells.append(cell)
