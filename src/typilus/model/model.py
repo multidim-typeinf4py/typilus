@@ -552,6 +552,7 @@ class Model(ABC):
 
     def train(self, train_data: List[RichPath], valid_data: List[RichPath], quiet: bool=False, resume: bool=False) -> RichPath:
         model_path = RichPath.create(self.model_save_path)
+        tf.compat.v1.disable_eager_execution()
         with self.__sess.as_default():
             tf.compat.v1.set_random_seed(self.hyperparameters['seed'])
 
