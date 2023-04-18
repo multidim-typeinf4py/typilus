@@ -117,7 +117,7 @@ class Model(ABC):
         return self.__run_name
 
     def save(self, path: RichPath) -> None:
-        variables_to_save = list(set(self.__sess.graph.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)))
+        variables_to_save = list(set(self.__sess.graph.get_collection(tf.compat.v1.GraphKeys.GLOBAL_VARIABLES)))
         weights_to_save = self.__sess.run(variables_to_save)
         weights_to_save = {var.name: value
                            for (var, value) in zip(variables_to_save, weights_to_save)}
