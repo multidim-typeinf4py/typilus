@@ -45,22 +45,22 @@ class TokenEmbedder(Component):
 
         if node_label_embedding_style == 'token':
             placeholder_dict[f'{name}_token_ids'] = \
-                tf.placeholder(dtype=tf.int32, shape=[None], name=f'{name}_token_ids')
+                tf.compat.v1.placeholder(dtype=tf.int32, shape=[None], name=f'{name}_token_ids')
 
         elif node_label_embedding_style == 'subtoken':
             placeholder_dict[f'{name}_subtoken_ids'] = \
-                tf.placeholder(dtype=tf.int32, shape=[None, hyperparameters[f'{name}_max_subtokens']],
+                tf.compat.v1.placeholder(dtype=tf.int32, shape=[None, hyperparameters[f'{name}_max_subtokens']],
                                name=f'{name}_subtoken_ids')
             placeholder_dict[f'{name}_num_subtokens'] = \
-                tf.placeholder(dtype=tf.int32, shape=[None], name=f'{name}_num_subtokens')
+                tf.compat.v1.placeholder(dtype=tf.int32, shape=[None], name=f'{name}_num_subtokens')
 
         elif node_label_embedding_style == 'charcnn':
             placeholder_dict[f'{name}_unique_chars'] = \
-                tf.placeholder(dtype=tf.int32,
+                tf.compat.v1.placeholder(dtype=tf.int32,
                                shape=[None, hyperparameters[f'{name}_char_length']],
                                name=f'{name}_unique_chars')
             placeholder_dict[f'{name}_unique_indices'] = \
-                tf.placeholder(dtype=tf.int32,
+                tf.compat.v1.placeholder(dtype=tf.int32,
                                shape=[None],
                                name=f'{name}_unique_indices')
         else:

@@ -60,14 +60,14 @@ class CodeGraphModel(Model):
         cg_edge_type_num = len(self.metadata['cg_edge_type_dict'])
 
         self.placeholders['cg_adjacency_lists'] = \
-            [tf.placeholder(dtype=tf.int64, shape=[None, 2], name='cg_adjacency_lists_e%s' % e)
+            [tf.compat.v1.placeholder(dtype=tf.int64, shape=[None, 2], name='cg_adjacency_lists_e%s' % e)
              for e in range(cg_edge_type_num)]
 
         if self.hyperparameters['cg_ggnn_use_edge_bias'] or self.hyperparameters['cg_ggnn_use_edge_msg_avg_aggregation']:
             self.placeholders['cg_num_incoming_edges_per_type'] = \
-                tf.placeholder(dtype=tf.float32, shape=[None, cg_edge_type_num], name='cg_num_incoming_edges_per_type')
+                tf.compat.v1.placeholder(dtype=tf.float32, shape=[None, cg_edge_type_num], name='cg_num_incoming_edges_per_type')
             self.placeholders['cg_num_outgoing_edges_per_type'] = \
-                tf.placeholder(dtype=tf.float32, shape=[None, cg_edge_type_num], name='cg_num_outgoing_edges_per_type')
+                tf.compat.v1.placeholder(dtype=tf.float32, shape=[None, cg_edge_type_num], name='cg_num_outgoing_edges_per_type')
 
     def _make_parameters(self):
         super()._make_parameters()

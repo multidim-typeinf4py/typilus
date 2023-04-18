@@ -76,20 +76,20 @@ class Sequence2Annotation(Model, TypeClassificationModel):
         super()._make_placeholders(is_train)
         TokenEmbedder.make_placeholders('token', self.placeholders, hyperparameters=self.hyperparameters)
 
-        self.placeholders['embedding_gather_matrix'] = tf.placeholder(tf.int32, shape=(None, None),
+        self.placeholders['embedding_gather_matrix'] = tf.compat.v1.placeholder(tf.int32, shape=(None, None),
                                                                       name='embedding_gather_matrix')
 
-        self.placeholders['sequence_lengths'] = tf.placeholder(tf.int32,
+        self.placeholders['sequence_lengths'] = tf.compat.v1.placeholder(tf.int32,
                                                                        shape=(None,),
                                                                        name="sequence_lengths")
 
-        self.placeholders['variable_bound_token_ids'] = tf.placeholder(tf.int32,
+        self.placeholders['variable_bound_token_ids'] = tf.compat.v1.placeholder(tf.int32,
                                                                      shape=(None,),
                                                                      name="variable_bound_token_ids")
-        self.placeholders['token_variable_ids'] = tf.placeholder(tf.int32,
+        self.placeholders['token_variable_ids'] = tf.compat.v1.placeholder(tf.int32,
                                                                        shape=(None,),
                                                                        name="token_variable_ids")
-        self.placeholders['num_variables'] = tf.placeholder(tf.int32, shape=[], name="num_variables")
+        self.placeholders['num_variables'] = tf.compat.v1.placeholder(tf.int32, shape=[], name="num_variables")
 
         self.__type_classification._make_placeholders(is_train)
 

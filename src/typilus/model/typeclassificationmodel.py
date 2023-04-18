@@ -41,7 +41,7 @@ class TypeClassificationModel(ABC):
 
     def _make_placeholders(self, is_train: bool) -> None:
         self.__model.placeholders['typed_annotation_target_class'] = \
-            tf.placeholder(tf.int32, shape=(None,),
+            tf.compat.v1.placeholder(tf.int32, shape=(None,),
                            name="typed_annotation_target_class")
 
     def _make_model(self, target_representations, is_train: bool = True) -> None:

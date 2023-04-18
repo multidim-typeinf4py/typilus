@@ -173,8 +173,8 @@ class Model(ABC):
 
     @abstractmethod
     def _make_placeholders(self, is_train: bool) -> None:
-        self.__placeholders['batch_size'] = tf.placeholder(tf.int32, shape=(), name="batch_size")
-        self.__placeholders['dropout_keep_rate'] = tf.placeholder(tf.float32, shape=(), name='dropout_keep_rate')
+        self.__placeholders['batch_size'] = tf.compat.v1.placeholder(tf.int32, shape=(), name="batch_size")
+        self.__placeholders['dropout_keep_rate'] = tf.compat.v1.placeholder(tf.float32, shape=(), name='dropout_keep_rate')
 
     @abstractmethod
     def _make_model(self, is_train: bool=True) -> None:

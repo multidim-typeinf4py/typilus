@@ -26,7 +26,7 @@ class TypeMetricLearningModel:
 
     def _make_placeholders(self, is_train: bool) -> None:
         self.__model.placeholders['typed_annotation_pairs_are_equal'] = \
-            tf.placeholder(tf.int32, shape=(None, None), name="typed_annotation_pairs_are_equal")
+            tf.compat.v1.placeholder(tf.int32, shape=(None, None), name="typed_annotation_pairs_are_equal")
 
     def _make_model(self, target_representations, is_train: bool = True) -> None:
         # target_representations is N x D

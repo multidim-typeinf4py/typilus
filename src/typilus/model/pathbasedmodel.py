@@ -56,22 +56,22 @@ class PathBasedModel(Model):
 
         TokenEmbedder.make_placeholders('leaf_label', self.placeholders, hyperparameters=self.hyperparameters)
 
-        self.placeholders['path_elements'] = tf.placeholder(dtype=tf.int64,
+        self.placeholders['path_elements'] = tf.compat.v1.placeholder(dtype=tf.int64,
                                                     shape=[None, self.hyperparameters['max_path_size']],
                                                     name='path_elements')
-        self.placeholders['path_lengths'] = tf.placeholder(dtype=tf.int32,
+        self.placeholders['path_lengths'] = tf.compat.v1.placeholder(dtype=tf.int32,
                                                     shape=[None],
                                                     name='path_lengths')
 
-        self.placeholders['leaf_idxs'] = tf.placeholder(dtype=tf.int64,
+        self.placeholders['leaf_idxs'] = tf.compat.v1.placeholder(dtype=tf.int64,
                                                            shape=[None, 2],
                                                            name='leaf_idxs')
 
-        self.placeholders['path_to_sample_idx'] = tf.placeholder(dtype=tf.int32,
+        self.placeholders['path_to_sample_idx'] = tf.compat.v1.placeholder(dtype=tf.int32,
                                                            shape=[None],
                                                            name='path_to_sample')
 
-        self.placeholders['num_samples'] = tf.placeholder(dtype=tf.int32,
+        self.placeholders['num_samples'] = tf.compat.v1.placeholder(dtype=tf.int32,
                                                           shape=[],
                                                           name='num_samples')
 

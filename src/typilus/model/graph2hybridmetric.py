@@ -47,7 +47,7 @@ class Graph2HybridMetric(CodeGraphModel):
 
     def _make_placeholders(self, is_train: bool) -> None:
         super()._make_placeholders(is_train)
-        self.placeholders['typed_annotation_node_ids'] = tf.placeholder(tf.int32,
+        self.placeholders['typed_annotation_node_ids'] = tf.compat.v1.placeholder(tf.int32,
                                                                         shape=(
                                                                             None,),
                                                                         name="typed_annotation_node_ids")
