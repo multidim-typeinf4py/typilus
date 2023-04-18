@@ -40,7 +40,7 @@ class SparseGGNN:
         # Generate per-layer values for edge weights, biases and gated units. If we tie them, they are just copies:
         self.__weights = GGNNWeights([], [], [], [], [], [])
         for layer_idx in range(len(self.params['layer_timesteps'])):
-            with tf.variable_scope('gnn_layer_%i' % layer_idx):
+            with tf.compat.v1.variable_scope('gnn_layer_%i' % layer_idx):
                 edge_weights = tf.compat.v1.get_variable(name='gnn_edge_weights',
                                                shape=[effective_num_edge_types * h_dim, h_dim],
                                                initializer=tf.glorot_normal_initializer())
@@ -126,13 +126,13 @@ class SparseGGNN:
         message_targets = tf.concat(message_targets, axis=0)  # Shape [M]
         message_edge_types = tf.concat(message_edge_types, axis=0)  # Shape [M]
 
-        with tf.variable_scope('gnn_scope'):
+        with tf.compat.v1.variable_scope('gnn_scope'):
             node_states_per_layer = []  # list of tensors of shape [V, D], one entry per layer (the final state of that layer)
             node_states_per_layer.append(node_embeddings)
             num_nodes = tf.shape(node_embeddings, out_type=tf.int32)[0]
 
             for (layer_idx, num_timesteps) in enumerate(self.params['layer_timesteps']):
-                with tf.variable_scope('gnn_layer_%i' % layer_idx):
+                with tf.compat.v1.variable_scope('gnn_layer_%i' % layer_idx):
                     # Extract residual messages, if any:
                     layer_residual_connections = self.params['residual_connections'].get(str(layer_idx))
                     if layer_residual_connections is None:
@@ -145,7 +145,7 @@ class SparseGGNN:
                     node_states_per_layer.append(node_states_per_layer[-1])
 
                     for step in range(num_timesteps):
-                        with tf.variable_scope('timestep_%i' % step):
+                        with tf.compat.v1.variable_scope('timestep_%i' % step):
                             messages = []  # list of tensors of messages of shape [E, D]
                             message_source_states = []  # list of tensors of edge source states of shape [E, D]
 

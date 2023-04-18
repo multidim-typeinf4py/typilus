@@ -78,7 +78,7 @@ class CodeGraphModel(Model):
         super()._make_model(is_train)
 
         # ----- Compute representation of all nodes in context graph using a GGNN:
-        with tf.variable_scope("CodeGraph"):
+        with tf.compat.v1.variable_scope("CodeGraph"):
             # (1) Compute initial embeddings for the nodes in the graph:
 
             initial_cg_node_embeddings = TokenEmbedder.make_model('cg_node_label', self.placeholders, self.parameters,

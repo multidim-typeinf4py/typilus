@@ -134,7 +134,7 @@ class Sequence2Metric(Model):
             )
             current_out *= mask
 
-            with tf.variable_scope('seqlayer_%s' % i):
+            with tf.compat.v1.variable_scope('seqlayer_%s' % i):
                 current_out = seq_layer(current_out)
 
             if i < len(self.parameters['seq_layers']) - 1 and self.hyperparameters['use_consistency_layer']:

@@ -101,7 +101,7 @@ class PathBasedModel(Model):
     def _make_model(self, is_train: bool=True) -> None:
         super()._make_model(is_train)
 
-        with tf.variable_scope("PathsModel"):
+        with tf.compat.v1.variable_scope("PathsModel"):
             leaf_embeddings = TokenEmbedder.make_model('leaf_label', self.placeholders, self.parameters,
                                                                   self.hyperparameters, is_train)
             leaf_embeddings = tf.nn.dropout(leaf_embeddings, rate=self.hyperparameters['dropout_rate'])  # [num-leafs, D]
