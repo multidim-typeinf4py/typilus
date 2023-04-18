@@ -560,7 +560,7 @@ class Model(ABC):
                 best_val_loss, _ = self._run_epoch_in_batches(valid_data, "RESUME (valid)", is_train=False, quiet=quiet)
                 self.train_log('Validation Loss on Resume: %.6f' % (best_val_loss,))
             else:
-                init_op = tf.variables_initializer(self.__sess.graph.get_collection(tf.GraphKeys.GLOBAL_VARIABLES))
+                init_op = tf.compat.v1.variables_initializer(self.__sess.graph.get_collection(tf.compat.v1.GraphKeys.GLOBAL_VARIABLES))
                 self.__sess.run(init_op)
                 self.save(model_path)
                 best_val_loss = float("inf")
