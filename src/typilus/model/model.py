@@ -136,7 +136,7 @@ class Model(ABC):
         with self.__sess.graph.as_default():
             random.seed(self.hyperparameters['seed'])
             np.random.seed(self.hyperparameters['seed'])
-            tf.set_random_seed(self.hyperparameters['seed'])
+            tf.compat.v1.set_random_seed(self.hyperparameters['seed'])
 
             self._make_parameters()
             self._make_placeholders(is_train=is_train)
@@ -553,7 +553,7 @@ class Model(ABC):
     def train(self, train_data: List[RichPath], valid_data: List[RichPath], quiet: bool=False, resume: bool=False) -> RichPath:
         model_path = RichPath.create(self.model_save_path)
         with self.__sess.as_default():
-            tf.set_random_seed(self.hyperparameters['seed'])
+            tf.compat.v1.set_random_seed(self.hyperparameters['seed'])
 
             if resume:
                 # Variables should have been restored.
