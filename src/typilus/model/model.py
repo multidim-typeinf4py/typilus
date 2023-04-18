@@ -149,19 +149,19 @@ class Model(ABC):
         Constructs self.ops['train_step'] from self.ops['loss'] and hyperparameters.
         """
         # Calculate and clip gradients
-        trainable_vars = tf.trainable_variables()
-        gradients = tf.gradients(self.ops['loss'], trainable_vars)
-        clipped_gradients, _ = tf.clip_by_global_norm(gradients, self.hyperparameters['gradient_clip'])
+        trainable_vars = tf.compat.v1.trainable_variables()
+        gradients = tf.compat.v1.gradients(self.ops['loss'], trainable_vars)
+        clipped_gradients, _ = tf.compat.v1.clip_by_global_norm(gradients, self.hyperparameters['gradient_clip'])
 
         optimizer_name = self.hyperparameters['optimizer'].lower()
         if optimizer_name == 'sgd':
-            optimizer = tf.train.GradientDescentOptimizer(learning_rate=self.hyperparameters['learning_rate'])
+            optimizer = tf.compat.v1.train.GradientDescentOptimizer(learning_rate=self.hyperparameters['learning_rate'])
         elif optimizer_name == 'rmsprop':
-            optimizer = tf.train.RMSPropOptimizer(learning_rate=self.hyperparameters['learning_rate'],
+            optimizer = tf.compat.v1.train.RMSPropOptimizer(learning_rate=self.hyperparameters['learning_rate'],
                                                   decay=self.hyperparameters['learning_rate_decay'],
                                                   momentum=self.hyperparameters['momentum'])
         elif optimizer_name == 'adam':
-            optimizer = tf.train.AdamOptimizer(learning_rate=self.hyperparameters['learning_rate'])
+            optimizer = tf.compat.v1.train.AdamOptimizer(learning_rate=self.hyperparameters['learning_rate'])
         else:
             raise Exception('Unknown optimizer "%s".' % (self.hyperparameters['optimizer']))
 
