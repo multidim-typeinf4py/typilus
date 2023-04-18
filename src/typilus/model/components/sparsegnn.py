@@ -77,9 +77,9 @@ class SparseGGNN:
 
         cell_type = self.params['graph_rnn_cell'].lower()
         if cell_type == 'gru':
-            cell = tf.nn.rnn_cell.GRUCell(h_dim, activation=activation_fun)
+            cell = tf.compat.v1.nn.rnn_cell.GRUCell(h_dim, activation=activation_fun)
         elif cell_type == 'rnn':
-            cell = tf.nn.rnn_cell.BasicRNNCell(h_dim, activation=activation_fun)
+            cell = tf.compat.v1.nn.rnn_cell.BasicRNNCell(h_dim, activation=activation_fun)
         else:
             raise Exception("Unknown RNN cell type '%s'." % cell_type)
         return cell
