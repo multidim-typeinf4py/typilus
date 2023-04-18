@@ -86,7 +86,7 @@ class Sequence2HybridMetric(Model):
             raise ValueError('Unrecognized type of Sequential Layer %s' % seq_layer_type)
 
         self.parameters['metric_to_classification_linear_layer'] = \
-            tf.get_variable(name='metric_to_classification_linear_layer',
+            tf.compat.v1.get_variable(name='metric_to_classification_linear_layer',
                             initializer=tf.random_normal_initializer(),
                             shape=[out_size, out_size],
                             )

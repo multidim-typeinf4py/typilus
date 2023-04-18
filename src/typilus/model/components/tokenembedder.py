@@ -75,13 +75,13 @@ class TokenEmbedder(Component):
         if label_embedding_style == 'token':
             vocab_size = len(metadata[f'{name}_vocab'])
             parameters[f'{name}_embeddings'] = \
-                tf.get_variable(name=f'{name}_embeddings',
+                tf.compat.v1.get_variable(name=f'{name}_embeddings',
                                 shape=[vocab_size, label_embedding_size],
                                 initializer=tf.random_uniform_initializer())
         elif label_embedding_style == 'subtoken':
             vocab_size = len(metadata[f'{name}_subtoken_vocab'])
             parameters[f'{name}_subtoken_embeddings'] = \
-                tf.get_variable(name=f'{name}_subtoken_embeddings',
+                tf.compat.v1.get_variable(name=f'{name}_subtoken_embeddings',
                                 shape=[vocab_size, label_embedding_size],
                                 initializer=tf.random_uniform_initializer())
 

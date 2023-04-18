@@ -58,7 +58,7 @@ class Graph2HybridMetric(CodeGraphModel):
         super()._make_parameters()
         representation_size = self.hyperparameters['cg_ggnn_hidden_size']
         self.parameters['metric_to_classification_linear_layer'] = \
-            tf.get_variable(name='metric_to_classification_linear_layer',
+            tf.compat.v1.get_variable(name='metric_to_classification_linear_layer',
                             initializer=tf.random_normal_initializer(),
                             shape=[representation_size, representation_size],
                             )

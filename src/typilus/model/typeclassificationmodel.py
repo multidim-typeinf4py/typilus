@@ -27,13 +27,13 @@ class TypeClassificationModel(ABC):
     def _make_parameters(self, representation_size: int):
         type_vocabulary_size = len(self.__model.metadata['annotation_vocab'])
         self.__model.parameters['cg_representation_to_annotations_out'] = \
-            tf.get_variable(name='cg_representation_to_annotations_out',
+            tf.compat.v1.get_variable(name='cg_representation_to_annotations_out',
                             initializer=tf.random_uniform_initializer(),
                             shape=[
                                 representation_size, type_vocabulary_size],
                             )
 
-        self.__model.parameters['annotation_bias'] = tf.get_variable(
+        self.__model.parameters['annotation_bias'] = tf.compat.v1.get_variable(
             'annotation_class_bias',
             initializer=tf.zeros_initializer(),
             shape=(type_vocabulary_size,)

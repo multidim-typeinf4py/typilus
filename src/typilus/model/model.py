@@ -84,13 +84,13 @@ class Model(ABC):
         self.__model_save_dir = model_save_dir or "."
         self.__log_save_dir = log_save_dir or "."
 
-        config = tf.ConfigProto()
+        config = tf.compat.v1.ConfigProto()
         config.gpu_options.allow_growth = True
         if "gpu_device_id" in self.hyperparameters:
             config.gpu_options.visible_device_list = str(self.hyperparameters["gpu_device_id"])
 
         graph = tf.Graph()
-        self.__sess = tf.Session(graph=graph, config=config)
+        self.__sess = tf.compat.v1.Session(graph=graph, config=config)
 
     @property
     def metadata(self):

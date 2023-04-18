@@ -79,7 +79,7 @@ class PathBasedModel(Model):
         super()._make_parameters()
         TokenEmbedder.make_parameters('leaf_label', self.parameters, self.metadata, self.hyperparameters)
 
-        self.parameters['path_element_embeddings'] = tf.get_variable(name=f'path_element_embeddings',
+        self.parameters['path_element_embeddings'] = tf.compat.v1.get_variable(name=f'path_element_embeddings',
                                 shape=[len(self.metadata['non_terminal_dict']), self.hyperparameters['path_encoding_size']],
                                 initializer=tf.random_uniform_initializer())
 
@@ -88,12 +88,12 @@ class PathBasedModel(Model):
             merge_mode='concat'
         )
 
-        self.parameters['path_to_encoding_mx'] =  tf.get_variable(name='path_to_encoding_mx',
+        self.parameters['path_to_encoding_mx'] =  tf.compat.v1.get_variable(name='path_to_encoding_mx',
                                 shape=[2*self.hyperparameters['path_encoder_lstm_hidden_size'] + 2*self.hyperparameters['leaf_label_embedding_size'],
                                        self.hyperparameters['path_encoding_size']],
                                 initializer=tf.random_uniform_initializer())
 
-        self.parameters['path_encoding_self_att'] = tf.get_variable(name='path_encoding_self_att',
+        self.parameters['path_encoding_self_att'] = tf.compat.v1.get_variable(name='path_encoding_self_att',
                                                                  shape=[self.hyperparameters['path_encoding_size']],
                                                                  initializer=tf.random_uniform_initializer())
 
