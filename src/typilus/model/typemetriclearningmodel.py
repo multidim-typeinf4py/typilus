@@ -117,13 +117,13 @@ class TypeMetricLearningModel:
 
         index = annoy.AnnoyIndex(self.__type_representation_size, 'manhattan')
         indexed_element_types = []
-        logging.info('Creating index...')
+        print('Creating index...')
         for i, (representation, type) in enumerate(representation_iter()):
             index.add_item(i, representation)
             indexed_element_types.append(type)
-        logging.info('Indexing...')
+        print('Indexing...')
         index.build(20)
-        logging.info('Index Created.')
+        print('Index Created.')
 
         with tempfile.NamedTemporaryFile() as f:
             index.save(f.name)

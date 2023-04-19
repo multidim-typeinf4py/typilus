@@ -29,10 +29,13 @@ def run_indexing(model_path: RichPath, index_data_path: RichPath):
     data_chunks = index_data_path.get_filtered_files_in_dir('*.jsonl.gz')
 
     # Restore model
+    print("Restoring model...")
     model = model_restore_helper.restore(
         model_path, is_train=False, hyper_overrides=test_hyper_overrides)
 
     model.create_index(data_chunks)
+
+    print("Saving model...")
     model.save(model_path)
 
 
