@@ -549,7 +549,7 @@ class Model(ABC):
     @property
     def model_save_path(self) -> str:
         return os.path.join(self.__model_save_dir,
-                            "%s_%s_model_best.pkl.gz" % (seltf.compat.v1.f.__run_name, self.hyperparameters['run_id'],))
+                            "%s_%s_model_best.pkl.gz" % (self.__run_name, self.hyperparameters['run_id'],))
 
     def train(self, train_data: List[RichPath], valid_data: List[RichPath], quiet: bool=False, resume: bool=False) -> RichPath:
         model_path = RichPath.create(self.model_save_path)
