@@ -352,9 +352,9 @@ files = [
 ]
 
 [[package]]
-name = "dpu_utils"
+name = "dpu-utils"
 version = "0.6.1"
-description = ""
+description = "Python utilities used by Deep Procedural Intelligence"
 category = "main"
 optional = false
 python-versions = ">=3.6.1"
@@ -376,7 +376,7 @@ tqdm = "*"
 type = "git"
 url = "https://github.com/multidim-typeinf4py/dpu-utils"
 reference = "HEAD"
-resolved_reference = "3775eb03e897b03876a9713ab4c25d44078d173f"
+resolved_reference = "94c63958541addc03a2f130efa295868b1f37b8b"
 subdirectory = "python"
 [[package]]
 name = "flatbuffers"
