@@ -54,7 +54,7 @@ class Annotater(NodeTransformer):
         ("Literal", "typing_extensions"),
     }
 
-    def __init__(self, tc, ppath, granularity):
+    def __init__(self, tc, ppath, granularity, typing_rules = None):
         self.__tc = tc
         self.__ppath = ppath
         self.__predlines = list(load_jsonl_gz(self.__ppath))
@@ -63,7 +63,7 @@ class Annotater(NodeTransformer):
         self.__rel_lines = []
         self.__used_types = set()
         self.__logger = logging.getLogger(__name__)
-        self.__typing_types = self.__read_file("metadata/typing_types.txt")
+        self.__typing_types = self.__read_file(typing_rules or "metadata/typing_types.txt")
 
     def __read_file(self, fpath):
         with open(fpath, encoding="utf8") as f:
