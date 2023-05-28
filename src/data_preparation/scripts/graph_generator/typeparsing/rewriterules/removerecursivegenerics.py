@@ -1,8 +1,8 @@
 from typing import Optional
 
-from typeparsing.nodes import parse_type_annotation_node, TypeAnnotationNode, SubscriptAnnotationNode, \
+from ..nodes import parse_type_annotation_node, TypeAnnotationNode, SubscriptAnnotationNode, \
     IndexAnnotationNode, TupleAnnotationNode
-from typeparsing.rewriterules import RewriteRule
+from ..rewriterules import RewriteRule
 
 __all__ = ['RemoveRecursiveGenerics']
 

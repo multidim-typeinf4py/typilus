@@ -1,7 +1,7 @@
 from typing import Optional
 
-from typeparsing.nodes import parse_type_annotation_node, TypeAnnotationNode, SubscriptAnnotationNode
-from typeparsing.rewriterules import RewriteRule
+from ..nodes import parse_type_annotation_node, TypeAnnotationNode, SubscriptAnnotationNode
+from ..rewriterules import RewriteRule
 
 __all__ = ['RemoveStandAlones']
 

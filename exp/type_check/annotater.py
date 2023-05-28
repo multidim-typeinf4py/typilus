@@ -33,7 +33,7 @@ from typed_ast.ast3 import (
     parse,
 )
 
-from utils import rreplace
+from .utils import rreplace
 
 
 class AnnotationKind(Enum):

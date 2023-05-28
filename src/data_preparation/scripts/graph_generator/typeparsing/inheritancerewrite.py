@@ -2,9 +2,9 @@ from itertools import product
 from typing import Callable, Iterator, Set
 import random
 
-from typeparsing.nodes import TypeAnnotationNode, SubscriptAnnotationNode, TupleAnnotationNode, ListAnnotationNode, \
+from .nodes import TypeAnnotationNode, SubscriptAnnotationNode, TupleAnnotationNode, ListAnnotationNode, \
     AttributeAnnotationNode, IndexAnnotationNode, ElipsisAnnotationNode
-from typeparsing.visitor import TypeAnnotationVisitor
+from .visitor import TypeAnnotationVisitor
 
 __all__ = ['DirectInheritanceRewriting']
 
