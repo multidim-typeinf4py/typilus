@@ -54,7 +54,7 @@ class Annotater(NodeTransformer):
         ("Literal", "typing_extensions"),
     }
 
-    def __init__(self, tc, ppath, granularity, typing_rules = None):
+    def __init__(self, tc, ppath, granularity, typing_rules=None):
         self.__tc = tc
         self.__ppath = ppath
         self.__predlines = list(load_jsonl_gz(self.__ppath))
@@ -63,7 +63,9 @@ class Annotater(NodeTransformer):
         self.__rel_lines = []
         self.__used_types = set()
         self.__logger = logging.getLogger(__name__)
-        self.__typing_types = self.__read_file(typing_rules or "metadata/typing_types.txt")
+        self.__typing_types = self.__read_file(
+            typing_rules or "metadata/typing_types.txt"
+        )
 
     def __read_file(self, fpath):
         with open(fpath, encoding="utf8") as f:
@@ -71,11 +73,12 @@ class Annotater(NodeTransformer):
 
     def __sift(self, fpath=None, pred_idx=None):
         if fpath is not None:
-            rel_lines = filter(
-                lambda p: fpath.endswith(p["provenance"]), self.__predlines
-            )
+            rel_lines = list(filter(
+                lambda p: fpath.endswith(p["provenance"]),
+                (prediction for batch in self.__predlines for prediction in batch)
+            ))
         elif pred_idx is not None:
-            rel_lines = [self.__predlines[pred_idx]]
+            rel_lines = self.__predlines[pred_idx]
 
         # ! If the term is a property access, don't annotate it,
         # ! because both mypy and pytype don't support this case.
@@ -233,7 +236,7 @@ class Annotater(NodeTransformer):
         elif pred_type in self.__ANYS:
             self.__logger.warning("Ignoring predicted 'Any'.")
             return True
-        # Ignore corner case predictions, e.g. "..." 
+        # Ignore corner case predictions, e.g. "..."
         elif not findall(r"\w+", pred_type):
             self.__logger.warning(f"Ignoring prediction '{pred_type}'.")
             return True
