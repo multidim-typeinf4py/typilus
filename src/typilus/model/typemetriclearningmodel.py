@@ -71,7 +71,7 @@ class TypeMetricLearningModel:
     def _finalise_minibatch(self, batch_data: Dict[str, Any], is_train: bool, minibatch) -> None:
         targets = batch_data['batch_target_variable_type']
         num_annotations = len(targets)
-        types_are_equal = np.zeros((num_annotations, num_annotations), dtype=np.bool)
+        types_are_equal = np.zeros((num_annotations, num_annotations), dtype=np.bool_)
         for i in range(num_annotations):
             for j in range(i+1, num_annotations):
                 if targets[i] == targets[j]:
