@@ -265,6 +265,10 @@ class Annotater(NodeTransformer):
         self.__used_types.add(pred_type)
         self.__unmodified = False
         del self.__rel_lines[pred_idx]
+
+        pred_type_components = pred_type.replace(" ", "").split(",")
+        if len(pred_type_components) > 1:
+            pred_type = f"typing.Tuple[{', '.join(pred_type_components)}]"
         self.__logger.info(
             f"Annotating '{identifier}' with '{pred_type}' of {pred_prob:.2f} at line {lineno}."
         )
