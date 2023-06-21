@@ -266,10 +266,11 @@ class Annotater(NodeTransformer):
         self.__unmodified = False
         del self.__rel_lines[pred_idx]
 
-        # Additional check to see that the comma separated values are not in e.g. typing.Tuple[...] already
-        if "[" not in pred_type and "]" not in pred_type and "," in pred_type:
-            pred_type_components = pred_type.replace(" ", "").split(",")
-            pred_type = f"typing.Tuple[{', '.join(pred_type_components)}]"
+        # Parse again to check if a tuple type is appropriate here
+        if "," in pred_type and isinstance((parsed_pt := parse(pred_type).body[0].value), Tuple):
+            components = [astunparse.unparse(e).strip() for e in parsed_pt.elts]
+            pred_type = f"typing.Tuple[{', '.join(components)}]"
+
         self.__logger.info(
             f"Annotating '{identifier}' with '{pred_type}' of {pred_prob:.2f} at line {lineno}."
         )
