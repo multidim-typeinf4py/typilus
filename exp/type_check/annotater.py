@@ -266,8 +266,9 @@ class Annotater(NodeTransformer):
         self.__unmodified = False
         del self.__rel_lines[pred_idx]
 
-        pred_type_components = pred_type.replace(" ", "").split(",")
-        if len(pred_type_components) > 1:
+        # Additional check to see that the comma separated values are not in e.g. typing.Tuple[...] already
+        if "[" not in pred_type and "]" not in pred_type and "," in pred_type:
+            pred_type_components = pred_type.replace(" ", "").split(",")
             pred_type = f"typing.Tuple[{', '.join(pred_type_components)}]"
         self.__logger.info(
             f"Annotating '{identifier}' with '{pred_type}' of {pred_prob:.2f} at line {lineno}."
