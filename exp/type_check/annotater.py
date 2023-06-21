@@ -288,6 +288,9 @@ class Annotater(NodeTransformer):
 
         return node
 
+    def visit_Lambda(self, node):
+        return node
+
     # ! arg exists in only Python 3; Python 2 uses Name.
     # ! See https://greentreesnakes.readthedocs.io/en/latest/nodes.html#arg
     def visit_arg(self, node):
